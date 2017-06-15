@@ -1,6 +1,10 @@
 Noteworthy changes in release ?.? (????-??-??)
 ==============================================
 
+* New tools
+  * Added asinfo tool that is purposed to provide information about
+    system calls and architectures.
+
 * Improvements
   * Added -e trace=%creds option for tracing syscalls related to process
     credentials.
