@@ -309,6 +309,8 @@ strace_SOURCES =	\
 	statx.c		\
 	statx.h		\
 	strace.c	\
+	straus.c	\
+	straus.h	\
 	string_to_uint.c \
 	string_to_uint.h \
 	swapon.c	\

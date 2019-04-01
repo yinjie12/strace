@@ -914,6 +914,8 @@ Print the help summary.
 .B \-V
 Print the version number of
 .BR strace .
+Multiple instances of the option beyond specific threshold tend to increase
+Strauss awareness.
 .SH DIAGNOSTICS
 When
 .I command

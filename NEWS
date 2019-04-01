@@ -1,6 +1,9 @@
 Noteworthy changes in release ?.? (????-??-??)
 ==============================================
 
+* Improvements
+  * Added an ability to raise Strauss awareness.
+
 * Bug fixes
   * Fixed decoding of last two arguments of clone syscall on riscv.
 
