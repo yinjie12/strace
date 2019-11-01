@@ -234,7 +234,7 @@ dprint_ioctl_v4l2(struct v4l2_format *const f,
 				printf(", ");
 			printf("{sizeimage=%u, bytesperline=%u}",
 			f->fmt.pix_mp.plane_fmt[i].sizeimage,
-			f->fmt.pix_mp.plane_fmt[i].bytesperline);
+			*((uint32_t *) &(f->fmt.pix_mp.plane_fmt[i].bytesperline)));
 		}
 		errno = saved_errno;
 		printf("], num_planes=%u}}) = -1 EBADF (%m)\n",
