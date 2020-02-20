@@ -224,6 +224,15 @@ BEGIN_BPF_CMD_DECODER(BPF_MAP_CREATE)
 	PRINT_FIELD_FD(", ", attr, btf_fd, tcp);
 	PRINT_FIELD_U(", ", attr, btf_key_type_id);
 	PRINT_FIELD_U(", ", attr, btf_value_type_id);
+
+	/*
+	 * btf_vmlinux_value_type_id fields was introduced by Linux commit
+	 * v5.6-rc1~151^2~46^2~37^2~5.
+	 */
+	if (len <= offsetof(struct BPF_MAP_CREATE_struct,
+			    btf_vmlinux_value_type_id))
+		break;
+	PRINT_FIELD_U(", ", attr, btf_vmlinux_value_type_id);
 }
 END_BPF_CMD_DECODER(RVAL_DECODED | RVAL_FD)
 
@@ -522,6 +531,11 @@ print_bpf_map_info(struct tcb * const tcp, uint32_t bpf_fd,
 	if (len <= offsetof(struct bpf_map_info_struct, ifindex))
 		goto print_bpf_map_info_end;
 	PRINT_FIELD_IFINDEX(", ", info, ifindex);
+	/*
+	 * btf_vmlinux_value_type_id field was crammed in in Linux
+	 * commit v5.6-rc1~151^2~46^2~37^2~5.
+	 */
+	PRINT_FIELD_U(", ", info, btf_vmlinux_value_type_id);
 	PRINT_FIELD_DEV(", ", info, netns_dev);
 	PRINT_FIELD_U(", ", info, netns_ino);
 

@@ -87,6 +87,8 @@ print_map_create(void *attr_void, size_t size, long rc)
 		printf(", btf_fd=0</dev/null>"
 		       ", btf_key_type_id=0, btf_value_type_id=0");
 	}
+	if (size > offsetof(struct BPF_MAP_CREATE_struct, btf_vmlinux_value_type_id))
+		printf(", btf_vmlinux_value_type_id=0");
 	printf("}, %zu) = ", size);
 	if (rc >= 0)
 		printf("%ld<anon_inode:bpf-map>\n", rc);
@@ -352,6 +354,10 @@ main(int ac, char **av)
 	if (bpf_map_get_info_attr.info_len >
 	    offsetof(struct bpf_map_info_struct, ifindex))
 		printf(", ifindex=%u", map_info->ifindex);
+	if (bpf_map_get_info_attr.info_len >
+	    offsetof(struct bpf_map_info_struct, btf_vmlinux_value_type_id))
+		printf(", btf_vmlinux_value_type_id=%u",
+		       map_info->btf_vmlinux_value_type_id);
 	if (bpf_map_get_info_attr.info_len >
 	    offsetof(struct bpf_map_info_struct, netns_dev))
 		printf(", netns_dev=makedev(%#x, %#x)",
